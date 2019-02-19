@@ -1,4 +1,4 @@
-# jira-dashboard
+# eStatements-ui
 
 ## Project setup
 ```
