@@ -2,11 +2,44 @@
 
 	<div id="app">
 
+		<Error
+			v-if="hasError"
+			:message="errorMessage"
+			@close="hasError = false"
+		/>
+
 		<Navigation />
 
 		<div class="page-content">
 
-				<Landing @success="handleLandingSuccess" @error="handleLandingError" />
+			<Landing
+				v-if="pageState.showLanding"
+				@success="handleLandingSuccess"
+				@error="handleLandingError"
+			/>
+
+			<!-- <ConfirmMember
+				v-if="pageState.showConfirm"
+				@confirm="handleConfirmMember"
+				@cancel="handleCancelMember"
+			/>
+
+			<AccountList
+				v-if="pageState.showAccounts"
+				@select="handleSelectAccount"
+			/>
+
+			<Member
+				v-if="pageState.showMember"
+				@submit="handleSubmitChanges"
+				@unenroll="handleUnenroll"
+			/>
+
+			<Success
+				v-if="pageState.showSuccess"
+				@reset="handleReset"
+			/> -->
+
 
 		</div>
 
@@ -22,7 +55,7 @@
 
 	import axios from '@/plugins/axios';
 
-	import { Card, Navigation, Landing } from '@/components';
+	import { Card, Error, Navigation, Landing } from '@/components';
 
 	export default {
 
@@ -30,6 +63,7 @@
 		components: {
 
 			Card,
+			Error,
 			Navigation,
 			Landing
 
@@ -39,21 +73,82 @@
 
 				member: null,
 				hasError: false,
-				errorMessage: null
+				errorMessage: null,
+				pageState: {
+					showLanding: true,
+					showConfirm: false,
+					showAccounts: false,
+					showMember: false,
+					showSuccess: false
+				}
 
 			}
 		},
 		methods: {
 
+			// Landing "Page" Methods:
 			handleLandingSuccess(data) {
 
 				this.member = data;
+
+				this.clearPageState();
+
+				this.pageState.showConfirm = true;
 
 			},
 			handleLandingError(message) {
 
 				this.hasError = true;
 				this.errorMessage = message;
+
+			},
+
+			// Generic Methods:
+			clearPageState() {
+
+				Object.keys(this.pageState).forEach((state) => {
+					
+					this.pageState[state] = false;
+
+				});
+
+			},
+
+			// ConfirmMember "Page" Methods:
+			handleConfirmMember() {
+
+
+
+			},
+			handleCancelMember() {
+
+
+
+			},
+
+			// AccountList "Page" Methods:
+			handleSelectAccount() {
+
+
+
+			},
+
+			// Member "Page" Methods:
+			handleSubmitChanges() {
+
+
+
+			},
+			handleUnenroll() {
+
+
+
+			},
+
+			// Success "Page" Methods:
+			handleReset() {
+
+
 
 			}
 
