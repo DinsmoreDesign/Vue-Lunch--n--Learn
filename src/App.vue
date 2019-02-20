@@ -32,7 +32,7 @@
 			<Member
 				v-if="pageState.showMember"
 				@submit="handleSubmitChanges"
-				@unenroll="handleUnenroll"
+				@unenroll="handleSubmitChanges"
 			/>
 
 			<Success
@@ -117,38 +117,45 @@
 			// ConfirmMember "Page" Methods:
 			handleConfirmMember() {
 
+				this.clearPageState();
 
+				this.pageState.showAccounts = true;
 
 			},
 			handleCancelMember() {
 
+				this.clearPageState();
 
+				this.pageState.showLanding = true;
 
 			},
 
 			// AccountList "Page" Methods:
 			handleSelectAccount() {
 
+				this.clearPageState();
 
+				this.pageState.showMember = true;
 
 			},
 
 			// Member "Page" Methods:
-			handleSubmitChanges() {
+			handleSubmitChanges(message) {
 
+				this.clearPageState();
 
-
-			},
-			handleUnenroll() {
-
-
+				this.pageState.showSuccess = true;
+				
+				this.successMessage = message;
 
 			},
 
 			// Success "Page" Methods:
 			handleReset() {
 
+				this.clearPageState();
 
+				this.pageState.showLanding = true;
 
 			}
 
