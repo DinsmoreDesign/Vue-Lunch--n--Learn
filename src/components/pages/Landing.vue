@@ -117,7 +117,9 @@
             },
             emitResult(success, data) {
 
-                success ? this.$emit('success', data) : this.$emit('error', data);
+                success
+                    ? this.$emit('success', data)
+                    : this.$emit('error', data);
 
             }
 
@@ -132,73 +134,6 @@
 
 <style lang="scss" scoped>
 
-    .selection-container {
-        display: block;
-
-        .account-card {
-            margin: 1rem;
-
-            svg {
-                max-width: 150px;
-                display: block;
-                margin: 0 auto;
-                padding-bottom: 1rem;
-            }
-
-            h3 {
-                font-weight: 400;
-            }
-
-            .account-options {
-                margin-top: 1rem;
-                padding: 1rem;
-                background: rgba(115,134,154,.1);
-
-                input {
-                    display: block;
-                    margin: 0 auto;
-                    max-width: 100%;
-                    padding: 0.5rem;
-                    text-align: center;
-                }
-
-                button {
-                    cursor: pointer;
-                    display: block;
-                    margin: 0 auto;
-                    background: none;
-                    border: 2px solid #73869a;
-                    margin-top: 0.5rem;
-                    padding: 0.5rem;
-                    max-width: 100%;
-                    text-transform: uppercase;
-                    color: #73869a;
-                    font-size: 1.1rem;
-
-                    &:hover {
-                        background: #73869a;
-                        color: #FFF;
-                    }
-
-                }
-
-            }
-
-        }
-
-    }
-
-    @media screen and (min-width: 667px) {
-
-        .selection-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .account-card {
-            width: 50%;
-        }
-
-    }
+    @import '../../assets/css/landing';
 
 </style>
