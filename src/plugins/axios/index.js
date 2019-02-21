@@ -1,4 +1,3 @@
-import controllers from './controllers';
 import methods from './methods';
 
 export default {
