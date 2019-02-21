@@ -11,11 +11,11 @@
                 class="account-card"
                 textCentered
                 selectable
-                :selected="showAccount"
+                :selected="showAccountForm"
                 @clicked="openOptions('account')"
             >
                 <div class="title">
-                    <EmailIcon :fill="showAccount ? '#73869a' : '#777'" />
+                    <EmailIcon :fill="showAccountForm ? '#73869a' : '#777'" />
                     <h3>Account Number</h3>
                 </div>
 
@@ -32,11 +32,11 @@
                 class="account-card"
                 textCentered
                 selectable
-                :selected="showEmail"
+                :selected="showEmailForm"
                 @clicked="openOptions('email')"
             >
                 <div class="title">
-                    <UserIcon :fill="showEmail ? '#73869a' : '#777'" />
+                    <UserIcon :fill="showEmailForm ? '#73869a' : '#777'" />
                     <h3>Email</h3>
                 </div>
 
