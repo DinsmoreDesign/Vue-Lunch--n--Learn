@@ -2,7 +2,9 @@
 
     <nav>
         <div class="brand">
-            <img alt="SwitchThink logo" src="@/assets/logo.svg">
+            <a href="/" title="Go Home">
+                <img alt="SwitchThink logo" src="@/assets/logo.svg">
+            </a>
         </div>
         <div class="nav-items">
             <slot/>

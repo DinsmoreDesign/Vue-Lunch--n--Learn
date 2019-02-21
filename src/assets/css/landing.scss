@@ -2,17 +2,23 @@
     display: block;
 
     .account-card {
+        display: flex;
         margin: 1rem;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
 
-        svg {
-            max-width: 150px;
-            display: block;
-            margin: 0 auto;
-            padding-bottom: 1rem;
-        }
+        .title {
 
-        h3 {
-            font-weight: 400;
+            svg {
+                max-width: 150px;
+                padding-bottom: 1rem;
+            }
+    
+            h3 {
+                font-weight: 400;
+            }
+
         }
 
         .account-options {
@@ -21,8 +27,6 @@
             background: rgba(115,134,154,.1);
 
             input {
-                display: block;
-                margin: 0 auto;
                 max-width: 100%;
                 padding: 0.5rem;
                 text-align: center;
@@ -59,7 +63,7 @@
 
     .selection-container {
         display: flex;
-        align-items: center;
+        //align-items: center;
     }
 
     .account-card {

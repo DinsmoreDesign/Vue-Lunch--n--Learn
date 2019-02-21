@@ -8,17 +8,19 @@
         <div class="selection-container">
 
             <Card
-                :class="{ 'account-card': true }"
+                class="account-card"
                 textCentered
                 selectable
                 :selected="showAccount"
                 @clicked="openOptions('account')"
             >
-                <EmailIcon :fill="showAccount ? '#73869a' : '#777'" />
-                <h3>Account Number</h3>
+                <div class="title">
+                    <EmailIcon :fill="showAccount ? '#73869a' : '#777'" />
+                    <h3>Account Number</h3>
+                </div>
 
-                <transition name="fade">
-                    <form class="account-options" @submit.prevent="handleSubmit" v-if="showAccount">
+                <transition name="fade-grow">
+                    <form class="account-options" @submit.prevent="handleAccountSubmit" v-if="showAccountForm">
                         <input v-model="accountNumber" placeholder="1234567890">
                         <button type="submit">Search</button>
                     </form>
@@ -27,17 +29,19 @@
             </Card>
 
             <Card
-                :class="{ 'account-card': true }"
+                class="account-card"
                 textCentered
                 selectable
                 :selected="showEmail"
                 @clicked="openOptions('email')"
             >
-                <UserIcon :fill="showEmail ? '#73869a' : '#777'" />
-                <h3>Email</h3>
+                <div class="title">
+                    <UserIcon :fill="showEmail ? '#73869a' : '#777'" />
+                    <h3>Email</h3>
+                </div>
 
-                <transition name="fade">
-                    <form class="account-options" @submit.prevent="handleSubmit" v-if="showEmail">
+                <transition name="fade-grow">
+                    <form class="account-options" @submit.prevent="handleEmailSubmit" v-if="showEmailForm">
                         <input v-model="emailAddress" placeholder="jane.doe@example.com">
                         <button type="submit">Search</button>
                     </form>
@@ -73,8 +77,8 @@
         data() {
             return {
 
-                showAccount: false,
-                showEmail: false,
+                showAccountForm: false,
+                showEmailForm: false,
                 accountNumber: null,
                 emailAddress: null
             }
@@ -85,41 +89,31 @@
 
                 if (type === 'account') {
 
-                    this.showEmail = false;
-                    this.showAccount = true;
+                    this.showEmailForm = false;
+                    this.showAccountForm = true;
 
-                } else {
+                }
+                
+                if (type === 'email') {
 
-                    this.showAccount = false;
-                    this.showEmail = true;
+                    this.showAccountForm = false;
+                    this.showEmailForm = true;
 
                 }
 
             },
-            handleSubmit() {
+            handleAccountSubmit() {
 
-                if (this.showAccount && this.accountNumber) {
-
-                    return axios.get('/member/accountNumber/' + this.accountNumber)
-                        .then(response => this.emitResult(true, response))
-                        .catch(error => this.emitResult(false, error));
-
-                };
-
-                if (this.showEmail && this.emailAddress) {
-
-                    return axios.get('/member/email/' + this.emailAddress)
-                        .then(response => this.emitResult(true, response))
-                        .catch(error => this.emitResult(false, error));
-
-                };
+                return axios.get('/member/accountNumber/' + this.accountNumber)
+                    .then(response => this.$emit('success', response))
+                    .catch(error => this.$emit('error', error));
 
             },
-            emitResult(success, data) {
+            handleEmailSubmit() {
 
-                success
-                    ? this.$emit('success', data)
-                    : this.$emit('error', data);
+                return axios.get('/member/email/' + this.emailAddress)
+                    .then(response => this.$emit('success', response))
+                    .catch(error => this.$emit('error', error));
 
             }
 
