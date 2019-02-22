@@ -18,7 +18,7 @@
 				@error="handleLandingError"
 			/>
 
-			<!-- <ConfirmMember
+			<ConfirmMember
 				v-if="pageState.showConfirm"
 				v-model="memberConfirmData"
 				@confirm="handleConfirmMember"
@@ -42,7 +42,7 @@
 				v-if="pageState.showSuccess"
 				v-model="memberDetailsData"
 				@reset="handleReset"
-			/> -->
+			/>
 
 
 		</div>

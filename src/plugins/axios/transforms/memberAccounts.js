@@ -18,14 +18,23 @@
 
 export default function(data) {
 
-    return {
+    const accounts = data.constructor === Array ? data : [ data ];
+    let newData = [];
+    
+    for (let account of accounts) {
 
-        accountNumber: data.accountNumber,
-        email: data.member.email,
-        eligible: data.estatements.eligible,
-        disclosureAccepted: data.estatements.disclosureAccepted,
-        enrollmentStarted: data.estatements.enrollmentStarted
+        newData.push({
 
-    };
+            accountNumber: data.accountNumber,
+            email: data.member.email,
+            eligible: data.estatements.eligible,
+            disclosureAccepted: data.estatements.disclosureAccepted,
+            enrollmentStarted: data.estatements.enrollmentStarted
+
+        });
+
+    }
+
+    return newData;
 
 }; 
