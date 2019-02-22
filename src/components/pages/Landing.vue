@@ -90,6 +90,7 @@
                 if (type === 'account') {
 
                     this.showEmailForm = false;
+                    this.emailAddress = null;
                     this.showAccountForm = true;
 
                 }
@@ -97,6 +98,7 @@
                 if (type === 'email') {
 
                     this.showAccountForm = false;
+                    this.accountNumber = null;
                     this.showEmailForm = true;
 
                 }
@@ -104,9 +106,15 @@
             },
             handleSubmit() {
 
-                return axios.get('/member/search/' + this.accountNumber)
-                    .then(response => this.$emit('success', response))
-                    .catch(error => this.$emit('error', error));
+                const searchTerm = this.accountNumber ? this.accountNumber : this.emailAddress;
+
+                if (searchTerm) {
+
+                    return axios.get('/member/search/' + searchTerm)
+                        .then(response => this.$emit('success', response))
+                        .catch(error => this.$emit('error', error));
+
+                }
 
             }
 
