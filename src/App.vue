@@ -20,27 +20,27 @@
 
 			<!-- <ConfirmMember
 				v-if="pageState.showConfirm"
-				:data="memberConfirmData"
+				v-model="memberConfirmData"
 				@confirm="handleConfirmMember"
 				@cancel="handleCancelMember"
 			/>
 
 			<AccountList
 				v-if="pageState.showAccounts"
-				:data="memberAccountsData"
+				v-model="memberAccountsData"
 				@select="handleSelectAccount"
 			/>
 
-			<Member
+			<MemberDetails
 				v-if="pageState.showMember"
-				:data="memberDetailsData"
+				v-model="memberDetailsData"
 				@submit="handleSubmitChanges"
 				@unenroll="handleSubmitChanges"
 			/>
 
 			<Success
 				v-if="pageState.showSuccess"
-				:data="memberDetailsData"
+				v-model="memberDetailsData"
 				@reset="handleReset"
 			/> -->
 
@@ -59,7 +59,7 @@
 
 	import axios from '@/plugins/axios';
 
-	import { Card, Error, Navigation, Landing } from '@/components';
+	import { Card, Error, Navigation, AccountList, ConfirmMember, Landing, MemberDetails, Success } from '@/components';
 
 	export default {
 
@@ -69,7 +69,11 @@
 			Card,
 			Error,
 			Navigation,
-			Landing
+			AccountList,
+			ConfirmMember,
+			Landing,
+			MemberDetails,
+			Success
 
 		},
 		data() {

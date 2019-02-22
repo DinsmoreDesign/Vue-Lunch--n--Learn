@@ -7,7 +7,11 @@ const EmailIcon = () => import(/* webpackChunkName: "component-email-icon" */ '@
 const ErrorIcon = () => import(/* webpackChunkName: "component-error-icon" */ '@/components/icons/ErrorIcon.vue');
 const UserIcon = () => import(/* webpackChunkName: "component-user-icon" */ '@/components/icons/UserIcon.vue');
 
-const Landing = () => import(/* webpackChunkName: "page-component-landing" */ '@/components/pages/Landing.vue');
+const AccountList = () => import(/* webpackChunkName: "page-account-list" */ '@/components/pages/AccountList.vue');
+const ConfirmMember = () => import(/* webpackChunkName: "page-confirm-member" */ '@/components/pages/ConfirmMember.vue');
+const Landing = () => import(/* webpackChunkName: "page-landing" */ '@/components/pages/Landing.vue');
+const MemberDetails = () => import(/* webpackChunkName: "page-member-details" */ '@/components/pages/MemberDetails.vue');
+const Success = () => import(/* webpackChunkName: "page-success" */ '@/components/pages/Success.vue');
 
 export {
 
@@ -20,6 +24,10 @@ export {
     ErrorIcon,
     UserIcon,
 
-    Landing
+    AccountList,
+    ConfirmMember,
+    Landing,
+    MemberDetails,
+    Success
 
 };
