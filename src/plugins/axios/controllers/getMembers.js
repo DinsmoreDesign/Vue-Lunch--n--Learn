@@ -1,9 +1,9 @@
 import db from '@/db';
-import processData from '@/plugins/axios/methods/processData';
+import helpers from '../helpers';
 
 export default function() {
 
     return db.collection('members').get()
-        .then(response => processData(response))
+        .then(response => helpers.processData(response))
 
 };

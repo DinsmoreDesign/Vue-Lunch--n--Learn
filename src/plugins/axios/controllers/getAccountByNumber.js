@@ -1,9 +1,9 @@
 import db from '@/db';
-import processData from '@/plugins/axios/methods/processData';
+import helpers from '../helpers';
 
 export default function(accountNumber) {
 
     return db.collection('members').where('accountNumber', '==', accountNumber).get()
-        .then(response => processData(response))
+        .then(response => helpers.processData(response))
 
 };

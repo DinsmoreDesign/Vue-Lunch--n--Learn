@@ -1,9 +1,9 @@
-import processData from './processData';
-import testValidRoute from './testValidRoute';
+import httpGet from './httpGet';
+import httpPost from './httpPost';
 
 export default {
 
-    processData,
-    testValidRoute
+    httpGet,
+    httpPost
 
 };
