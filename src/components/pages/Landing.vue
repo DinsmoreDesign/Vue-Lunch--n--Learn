@@ -20,7 +20,7 @@
                 </div>
 
                 <transition name="fade-grow">
-                    <form class="account-options" @submit.prevent="handleAccountSubmit" v-if="showAccountForm">
+                    <form class="account-options" @submit.prevent="handleSubmit" v-if="showAccountForm">
                         <input v-model="accountNumber" placeholder="1234567890">
                         <button type="submit">Search</button>
                     </form>
@@ -41,7 +41,7 @@
                 </div>
 
                 <transition name="fade-grow">
-                    <form class="account-options" @submit.prevent="handleEmailSubmit" v-if="showEmailForm">
+                    <form class="account-options" @submit.prevent="handleSubmit" v-if="showEmailForm">
                         <input v-model="emailAddress" placeholder="jane.doe@example.com">
                         <button type="submit">Search</button>
                     </form>
@@ -102,16 +102,9 @@
                 }
 
             },
-            handleAccountSubmit() {
+            handleSubmit() {
 
-                return axios.get('/member/accountNumber/' + this.accountNumber)
-                    .then(response => this.$emit('success', response))
-                    .catch(error => this.$emit('error', error));
-
-            },
-            handleEmailSubmit() {
-
-                return axios.get('/member/email/' + this.emailAddress)
+                return axios.get('/member/search/' + this.accountNumber)
                     .then(response => this.$emit('success', response))
                     .catch(error => this.$emit('error', error));
 

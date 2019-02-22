@@ -20,23 +20,27 @@
 
 			<!-- <ConfirmMember
 				v-if="pageState.showConfirm"
+				:data="memberConfirmData"
 				@confirm="handleConfirmMember"
 				@cancel="handleCancelMember"
 			/>
 
 			<AccountList
 				v-if="pageState.showAccounts"
+				:data="memberAccountsData"
 				@select="handleSelectAccount"
 			/>
 
 			<Member
 				v-if="pageState.showMember"
+				:data="memberDetailsData"
 				@submit="handleSubmitChanges"
 				@unenroll="handleSubmitChanges"
 			/>
 
 			<Success
 				v-if="pageState.showSuccess"
+				:data="memberDetailsData"
 				@reset="handleReset"
 			/> -->
 
@@ -71,7 +75,6 @@
 		data() {
 			return {
 
-				member: null,
 				hasError: false,
 				errorMessage: null,
 				pageState: {
@@ -80,7 +83,10 @@
 					showAccounts: false,
 					showMember: false,
 					showSuccess: false
-				}
+				},
+				memberConfirmData: null,
+				memberAccountsData: null,
+				memberDetailsData: null
 
 			}
 		},
@@ -89,7 +95,7 @@
 			// Landing "Page" Methods:
 			handleLandingSuccess(data) {
 
-				this.member = data;
+				this.memberConfirmData = data;
 
 				this.clearPageState();
 
@@ -115,7 +121,9 @@
 			},
 
 			// ConfirmMember "Page" Methods:
-			handleConfirmMember() {
+			handleConfirmMember(data) {
+
+				this.memberAccountsData = data;
 
 				this.clearPageState();
 
@@ -131,7 +139,9 @@
 			},
 
 			// AccountList "Page" Methods:
-			handleSelectAccount() {
+			handleSelectAccount(data) {
+
+				this.memberDetailsData = data;
 
 				this.clearPageState();
 
