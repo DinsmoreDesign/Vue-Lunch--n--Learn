@@ -1,0 +1,130 @@
+/*
+ *** FADE ANIMATION ***
+ */
+    .fade-enter-active,
+    .fade-leave-active {
+        transition: opacity .5s;
+    }
+
+    .fade-enter,
+    .fade-leave-to {
+        opacity: 0;
+    }
+
+/*
+ *** FADE-GROW ANIMATION ***
+ */
+    .fade-grow-enter-active,
+    .fade-grow-leave-active {
+        transition: opacity 0.5s;
+    }
+    
+    .fade-grow-enter,
+    .fade-grow-leave-to {
+        opacity: 0;
+    }
+
+    .fade-grow-enter-active {
+        animation: grow 0.5s;
+    }
+
+    .fade-grow-leave-active {
+        animation: grow .5s reverse;
+    }
+
+    @keyframes grow {
+        0% {
+            transform: scale(0);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+
+/*
+ *** SLIDE-FADE ANIMATION ***
+ */
+    .slide-fade-enter-active {
+        transition: all .3s ease;
+    }
+
+    .slide-fade-leave-active {
+        transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    }
+
+    .slide-fade-enter,
+    .slide-fade-leave-to {
+        transform: translateX(10px);
+        opacity: 0;
+    }
+
+/*
+ *** BOUNCE ANIMATION ***
+ */
+    .bounce-enter-active {
+        animation: bounce-in .5s;
+    }
+
+    .bounce-leave-active {
+        animation: bounce-in .5s reverse;
+    }
+
+    @keyframes bounce-in {
+        0% {
+            transform: scale(0);
+        }
+
+        50% {
+            transform: scale(1.5);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+
+/*
+ *** SLIDE-UP-FADE ANIMATION ***
+ */
+    .slide-up-fade-item {
+        display: inline-block;
+        margin-right: 10px;
+    }
+    
+    .slide-up-fade-enter-active,
+    .slide-up-fade-leave-active {
+        transition: all 1s;
+    }
+
+    .slide-up-fade-enter,
+    .slide-up-fade-leave-to {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+/*
+ *** FLIP-FADE MOVE ANIMATION ***
+ */
+    .flip-fade-move {
+        transition: transform 1s;
+    }
+
+/*
+ *** SLIDE-UP-FLIP ANIMATION ***
+ */
+    .slide-up-flip-item {
+        transition: all 1s;
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .slide-up-flip-enter,
+    .slide-up-flip-leave-to {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    .slide-up-flip-leave-active {
+        position: absolute;
+    }
