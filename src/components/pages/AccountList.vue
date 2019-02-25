@@ -5,30 +5,11 @@
         <h1>Eligible Accounts</h1>
         <p>If one of your accounts is not listed, contact BOSS at (602) 335-2677.</p>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>Account Number</th>
-                    <th>Email</th>
-                    <th>Eligible</th>
-                    <th>Disclosure Accepted</th>
-                    <th>Enrollment Started</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="account in value" :key="account.accountNumber">
-                    <td>{{ account.accountNumber }}</td>
-                    <td>{{ account.email }}</td>
-                    <td>{{ account.eligible ? 'Yes' : 'No' }}</td>
-                    <td>{{ account.disclosureAccepted ? 'Yes' : 'No' }}</td>
-                    <td>{{ account.enrollmentStarted ? 'Yes' : 'No' }}</td>
-                    <td>
-                        <button type="button" :title="`Select account number ${ account.accountNumber }`" @click="handleSelect(account.accountNumber)">Select</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <AccountTable
+            :headers="accountHeaders"
+            :accounts="value"
+            @select="handleSelect"
+        />
 
     </Card>
 
@@ -39,12 +20,13 @@
 
 <script>
 
-    import { Card } from '@/components';
+    import { AccountTable, Card } from '@/components';
 
     export default {
 
         components: {
 
+            AccountTable,
             Card
 
         },
@@ -55,6 +37,20 @@
                 required: true
             }
 
+        },
+        data() {
+            return {
+
+                accountHeaders: [
+                    'Account Number',
+                    'Email',
+                    'Eligible',
+                    'Disclosure Accepted',
+                    'Enrollment Started',
+                    'Actions'
+                ]
+
+            }
         },
         methods: {
 

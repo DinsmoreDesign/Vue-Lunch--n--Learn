@@ -6,30 +6,40 @@
 
         <form @submit.prevent="handleSubmit">
 
-            <div class="field-group">
-                <label for="accountNumber">Account Number:</label>
-                <input type="text" name="accountNumber" id="accountNumber" :value="value.accountNumber" disabled="disabled" />
-            </div>
+            <TextInput
+                v-model="value.accountNumber"
+                label="Account Number"
+                id="accountNumber"
+                disabled
+            />
 
-            <div class="field-group">
-                <label for="name">Name:</label>
-                <input type="text" name="name" id="name" :value="value.name" disabled="disabled" />
-            </div>
+            <TextInput
+                v-model="value.name"
+                label="Name"
+                id="name"
+                disabled
+            />
 
-            <div class="field-group">
-                <label for="address">Address:</label>
-                <input type="text" name="address" id="address" :value="value.address" disabled="disabled" />
-            </div>
+            <TextInput
+                v-model="value.address"
+                label="Address"
+                id="address"
+                disabled
+            />
 
-            <div class="field-group">
-                <label for="phone">Phone:</label>
-                <input type="text" name="phone" id="phone" :value="value.phone" disabled="disabled" />
-            </div>
+            <TextInput
+                v-model="value.phone"
+                label="Phone"
+                id="phone"
+                disabled
+            />
 
-            <div class="field-group">
-                <label for="dob">Date of Birth:</label>
-                <input type="text" name="dob" id="dob" :value="value.dob" disabled="disabled" />
-            </div>
+            <TextInput
+                v-model="value.dob"
+                label="Date of Birth"
+                id="dob"
+                disabled
+            />
 
             <div class="field-group">
                 <button class="cancel" type="button" title="Cancel Member Submission" @click="handleCancel">Cancel</button>
@@ -47,13 +57,15 @@
 
 <script>
 
-    import { Card } from '@/components';
+    import { Card, TextBox, TextInput } from '@/components';
 
     export default {
 
         components: {
 
-            Card
+            Card,
+            TextBox,
+            TextInput
 
         },
         props: {
