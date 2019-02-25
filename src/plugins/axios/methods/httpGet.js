@@ -15,9 +15,9 @@ export default function(route) {
 
     };
 
-    // If window.searchTerm doesn't exist, set it
-    if (!window.searchTerm) {
-        
+    // If we're doing a search, or window.searchTerm doesn't exist, set it:
+    if (controller === 'search' || !window.searchTerm) {
+
         window.searchTerm = route.substring(route.lastIndexOf("/") + 1, route.length);
 
     };
@@ -46,7 +46,7 @@ export default function(route) {
     // Mutate our returned data according to the route requested
     async function sendData() {
 
-        if (controller === 'search') return transforms.searchResults(window.memberData ? window.memberData : await getData(window.searchTerm));
+        if (controller === 'search') return transforms.searchResults(await getData(window.searchTerm));
         if (controller === 'accounts') return transforms.memberAccounts(window.memberData ? window.memberData : await getData(window.searchTerm));
         if (controller === 'details') return transforms.memberDetails(window.memberData ? window.memberData : await getData(window.searchTerm));
 

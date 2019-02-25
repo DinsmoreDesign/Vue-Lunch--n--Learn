@@ -167,12 +167,10 @@
 
 				return axios.post('/member/update', details)
 					.then(response => {
-						
+
 						this.clearPageState();
 
 						this.pageState.showSuccess = true;
-						
-						this.successMessage = message;
 
 					})
 					.catch(error => {

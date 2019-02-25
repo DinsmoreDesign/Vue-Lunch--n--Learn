@@ -88,6 +88,6 @@
 
 <style lang="scss" scoped>
 
-    @import '../../assets/css/confirmMember';
+    @import '../../assets/css/form';
 
 </style>
