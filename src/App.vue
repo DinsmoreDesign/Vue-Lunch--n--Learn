@@ -14,8 +14,7 @@
 
 			<Landing
 				v-if="pageState.showLanding"
-				@success="handleLandingSuccess"
-				@error="handleLandingError"
+				@submit="handleLandingSubmit"
 			/>
 
 			<ConfirmMember
@@ -34,8 +33,8 @@
 			<MemberDetails
 				v-if="pageState.showMember"
 				v-model="memberDetailsData"
-				@submit="handleSubmitChanges"
-				@unenroll="handleSubmitChanges"
+				@submit="handleChanges"
+				@changeEnrollment="handleChanges"
 			/>
 
 			<Success
@@ -43,7 +42,6 @@
 				v-model="memberDetailsData"
 				@reset="handleReset"
 			/>
-
 
 		</div>
 
@@ -96,23 +94,6 @@
 		},
 		methods: {
 
-			// Landing "Page" Methods:
-			handleLandingSuccess(data) {
-
-				this.memberConfirmData = data;
-
-				this.clearPageState();
-
-				this.pageState.showConfirm = true;
-
-			},
-			handleLandingError(message) {
-
-				this.hasError = true;
-				this.errorMessage = message;
-
-			},
-
 			// Generic Methods:
 			clearPageState() {
 
@@ -123,15 +104,40 @@
 				});
 
 			},
+			// Landing "Page" Methods:
+			handleLandingSubmit(searchTerm) {
 
+				return axios.get('/member/search/' + searchTerm)
+					.then(response => {
+
+						this.memberConfirmData = response;
+
+						this.clearPageState();
+
+						this.pageState.showConfirm = true;
+
+					})
+					.catch(error => {
+						
+						this.hasError = true;
+						this.errorMessage = error;
+
+					});
+
+			},
 			// ConfirmMember "Page" Methods:
-			handleConfirmMember(data) {
+			handleConfirmMember() {
 
-				this.memberAccountsData = data;
+				return axios.get('/member/accounts/')
+                    .then(response => {
 
-				this.clearPageState();
+						this.memberAccountsData = response;
 
-				this.pageState.showAccounts = true;
+						this.clearPageState();
+
+						this.pageState.showAccounts = true;
+
+					});
 
 			},
 			handleCancelMember() {
@@ -141,29 +147,42 @@
 				this.pageState.showLanding = true;
 
 			},
-
 			// AccountList "Page" Methods:
-			handleSelectAccount(data) {
+			handleSelectAccount(accountNumber) {
 
-				this.memberDetailsData = data;
+				return axios.get('/member/details/' + accountNumber)
+                    .then(response => {
 
-				this.clearPageState();
+						this.memberDetailsData = response;
+						
+						this.clearPageState();
 
-				this.pageState.showMember = true;
+						this.pageState.showMember = true;
+
+					});
 
 			},
-
 			// Member "Page" Methods:
-			handleSubmitChanges(message) {
+			handleChanges(details) {
 
-				this.clearPageState();
+				return axios.post('/member/update', details)
+					.then(response => {
+						
+						this.clearPageState();
 
-				this.pageState.showSuccess = true;
-				
-				this.successMessage = message;
+						this.pageState.showSuccess = true;
+						
+						this.successMessage = message;
+
+					})
+					.catch(error => {
+
+						this.hasError = true;
+						this.errorMessage = error;
+
+					});
 
 			},
-
 			// Success "Page" Methods:
 			handleReset() {
 

@@ -2,7 +2,7 @@
 
     <Card>
 
-        <h3>Eligible Accounts</h3>
+        <h1>Eligible Accounts</h1>
         <p>If one of your accounts is not listed, contact BOSS at (602) 335-2677.</p>
 
         <table>
@@ -13,16 +13,16 @@
                     <th>Eligible</th>
                     <th>Disclosure Accepted</th>
                     <th>Enrollment Started</th>
-                    <th>Select</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="account in value" :key="account.accountNumber">
                     <td>{{ account.accountNumber }}</td>
                     <td>{{ account.email }}</td>
-                    <td>{{ account.eligible }}</td>
-                    <td>{{ account.disclosureAccepted }}</td>
-                    <td>{{ account.enrollmentStarted }}</td>
+                    <td>{{ account.eligible ? 'Yes' : 'No' }}</td>
+                    <td>{{ account.disclosureAccepted ? 'Yes' : 'No' }}</td>
+                    <td>{{ account.enrollmentStarted ? 'Yes' : 'No' }}</td>
                     <td>
                         <button type="button" :title="`Select account number ${ account.accountNumber }`" @click="handleSelect(account.accountNumber)">Select</button>
                     </td>
@@ -38,8 +38,6 @@
 
 
 <script>
-
-    import axios from '@/plugins/axios';
 
     import { Card } from '@/components';
 
@@ -62,7 +60,7 @@
 
             handleSelect(accountNumber) {
 
-
+                this.$emit('select', accountNumber);
 
             }
 
@@ -77,16 +75,6 @@
 
 <style lang="scss" scoped>
 
-    table {
-
-        th {
-            width: 20%;
-        }
-
-        td {
-            text-align: center;
-        }
-
-    }
+    @import '../../assets/css/accountList';
 
 </style>

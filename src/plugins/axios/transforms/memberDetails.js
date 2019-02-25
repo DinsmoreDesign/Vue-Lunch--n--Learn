@@ -46,6 +46,7 @@
 
 export default function(data) {
 
+    console.log(data);
     return {
 
         id: data.id,

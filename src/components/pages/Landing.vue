@@ -1,6 +1,7 @@
 <template>
 
     <div>
+
         <p>
             Please enter a valid account number to enroll a member in eStatements or update the information for an existing eStatements user. Enter the email address to find only for members that are currently enrolled in eStatements. After you confirm that the member you are looking for is correct you can complete the enrollment or make the necessary updates to their eStatements information.
         </p>
@@ -50,7 +51,6 @@
             </Card>
 
         </div>
-        
 
     </div>
 
@@ -60,8 +60,6 @@
 
 
 <script>
-
-    import axios from '@/plugins/axios';
 
     import { Card, EmailIcon, UserIcon } from '@/components';
 
@@ -110,9 +108,7 @@
 
                 if (searchTerm) {
 
-                    return axios.get('/member/search/' + searchTerm)
-                        .then(response => this.$emit('success', response))
-                        .catch(error => this.$emit('error', error));
+                    this.$emit('submit', searchTerm);
 
                 }
 
