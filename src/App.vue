@@ -3,45 +3,16 @@
 	<div id="app">
 
 		<Error
-			v-if="hasError"
-			:message="errorMessage"
-			@close="hasError = false"
+			v-if="error.hasError"
+			:message="error.message"
+			@close="setUserError({ error: false, message: null })"
 		/>
 
 		<Navigation />
 
 		<div class="page-content">
 
-			<Landing
-				v-if="pageState.showLanding"
-				@submit="handleLandingSubmit"
-			/>
-
-			<ConfirmMember
-				v-if="pageState.showConfirm"
-				v-model="memberConfirmData"
-				@confirm="handleConfirmMember"
-				@cancel="handleCancelMember"
-			/>
-
-			<AccountList
-				v-if="pageState.showAccounts"
-				v-model="memberAccountsData"
-				@select="handleSelectAccount"
-			/>
-
-			<MemberDetails
-				v-if="pageState.showMember"
-				v-model="memberDetailsData"
-				@submit="handleChanges"
-				@changeEnrollment="handleChanges"
-			/>
-
-			<Success
-				v-if="pageState.showSuccess"
-				v-model="memberDetailsData"
-				@reset="handleReset"
-			/>
+			<router-view></router-view>
 
 		</div>
 
@@ -55,9 +26,10 @@
 
 <script>
 
+	import { mapState, mapActions } from 'vuex';
 	import axios from '@/plugins/axios';
 
-	import { Card, Error, Navigation, AccountList, ConfirmMember, Landing, MemberDetails, Success } from '@/components';
+	import { Card, Error, Navigation } from '@/components';
 
 	export default {
 
@@ -66,129 +38,25 @@
 
 			Card,
 			Error,
-			Navigation,
-			AccountList,
-			ConfirmMember,
-			Landing,
-			MemberDetails,
-			Success
+			Navigation
 
 		},
-		data() {
-			return {
+		computed: {
 
-				hasError: false,
-				errorMessage: null,
-				pageState: {
-					showLanding: true,
-					showConfirm: false,
-					showAccounts: false,
-					showMember: false,
-					showSuccess: false
-				},
-				memberConfirmData: null,
-				memberAccountsData: null,
-				memberDetailsData: null
+			...mapState({
 
-			}
+				error: state => state.userError
+				
+			})
+
 		},
 		methods: {
 
-			// Generic Methods:
-			clearPageState() {
+			...mapActions([
 
-				Object.keys(this.pageState).forEach((state) => {
-					
-					this.pageState[state] = false;
+				'setUserError'
 
-				});
-
-			},
-			// Landing "Page" Methods:
-			handleLandingSubmit(searchTerm) {
-
-				return axios.get('/member/search/' + searchTerm)
-					.then(response => {
-
-						this.memberConfirmData = response;
-
-						this.clearPageState();
-
-						this.pageState.showConfirm = true;
-
-					})
-					.catch(error => {
-						
-						this.hasError = true;
-						this.errorMessage = error;
-
-					});
-
-			},
-			// ConfirmMember "Page" Methods:
-			handleConfirmMember() {
-
-				return axios.get('/member/accounts/')
-                    .then(response => {
-
-						this.memberAccountsData = response;
-
-						this.clearPageState();
-
-						this.pageState.showAccounts = true;
-
-					});
-
-			},
-			handleCancelMember() {
-
-				this.clearPageState();
-
-				this.pageState.showLanding = true;
-
-			},
-			// AccountList "Page" Methods:
-			handleSelectAccount(accountNumber) {
-
-				return axios.get('/member/details/' + accountNumber)
-                    .then(response => {
-
-						this.memberDetailsData = response;
-						
-						this.clearPageState();
-
-						this.pageState.showMember = true;
-
-					});
-
-			},
-			// Member "Page" Methods:
-			handleChanges(details) {
-
-				return axios.post('/member/update', details)
-					.then(response => {
-
-						this.clearPageState();
-
-						this.pageState.showSuccess = true;
-
-					})
-					.catch(error => {
-
-						this.hasError = true;
-						this.errorMessage = error;
-
-					});
-
-			},
-			// Success "Page" Methods:
-			handleReset() {
-
-				this.clearPageState();
-
-				this.pageState.showLanding = true;
-
-			}
+			])
 
 		}
 

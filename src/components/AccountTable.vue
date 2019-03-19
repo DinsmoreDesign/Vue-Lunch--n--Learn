@@ -12,10 +12,10 @@
 
             <tr v-for="account in accounts" :key="account.accountNumber">
                 <td>{{ account.accountNumber }}</td>
-                <td>{{ account.email }}</td>
-                <td>{{ account.eligible ? 'Yes' : 'No' }}</td>
-                <td>{{ account.disclosureAccepted ? 'Yes' : 'No' }}</td>
-                <td>{{ account.enrollmentStarted ? 'Yes' : 'No' }}</td>
+                <td>{{ account.member.email }}</td>
+                <td>{{ account.estatements.eligible ? 'Yes' : 'No' }}</td>
+                <td>{{ account.estatements.disclosureAccepted ? 'Yes' : 'No' }}</td>
+                <td>{{ account.estatements.enrollmentStarted ? 'Yes' : 'No' }}</td>
                 <td>
                     <button type="button" :title="`Select account number ${ account.accountNumber }`" @click="handleSelect(account.accountNumber)">Select</button>
                 </td>
