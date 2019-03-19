@@ -46,6 +46,7 @@ export default function(route) {
     // Mutate our returned data according to the route requested
     async function sendData() {
 
+        if (controller === 'member') return [ await getData(route.substring(route.lastIndexOf("/") + 1, route.length)) ];
         if (controller === 'search') return transforms.searchResults(await getData(window.searchTerm));
         if (controller === 'accounts') return transforms.memberAccounts(window.memberData ? window.memberData : await getData(window.searchTerm));
         if (controller === 'details') return transforms.memberDetails(window.memberData ? window.memberData : await getData(window.searchTerm));
